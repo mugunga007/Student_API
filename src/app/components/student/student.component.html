@@ -1,0 +1,56 @@
+<div class="list_page">
+
+  <!-- search by name form  -->
+  <form class="search_name" [formGroup]="nameGroup" (ngSubmit)="update()">
+    <input [formControl]='searchNameControl' type="text" placeholder="Search by name" name="search_name" id="name-input"
+      autofocus>
+  </form>
+<!-- search by tags form  -->
+  <form class="search_name" [formGroup]="tagGroup" (ngSubmit)="update()">
+    <input [formControl]='searchTagControl' type="text" placeholder="Search by tags" name="search_tag" id="tag-input">
+  </form>
+ 
+  <!-- Student profile  -->
+  <div class="profile" *ngFor="let s of students_dummy ">
+    <div class="expand-btn">
+      <a (click)="s.grades_shown = !s.grades_shown">
+        <span *ngIf="!s.grades_shown">&#43;</span>
+        <span *ngIf="s.grades_shown">&#8722;</span>
+      </a>
+    </div>
+    <div class="image_box">
+      <img class="" [src]="[s.pic]" alt="">
+    </div>
+    <div class="info_box">
+      <div class="title">
+        <h1>{{s.firstName}} {{s.lastName}} </h1>
+      </div>
+
+      <div class="info">
+
+        <p>Email: {{s.email}} <br>
+          Company: {{s.company}}<br>
+
+          Skill: {{s.skill}}<br>
+          Average: {{s.average }}%</p>
+        <div class="grades" *ngIf="s.grades_shown">
+          <ol style="list-style-type: none;">
+            <li *ngFor="let g of s.grades; index as n">
+              Test{{n+1}}:&nbsp;{{g}}%
+            </li>
+          </ol>
+          <!-- List of student's tags -->
+          <div class="tags">
+            <button type="submit" class="tag_button" *ngFor="let t of s.tag">{{t}}</button>
+          </div>
+          <!-- Add tag form  -->
+          <form (ngSubmit)="addTag(s,tag_name)" class="add_tag">
+            <input [(ngModel)]="tag_name" type="text" placeholder="Add a tag" name="tag" id="tag-input"
+              class="add-tag-input">
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

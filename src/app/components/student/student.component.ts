@@ -161,7 +161,7 @@ export class StudentComponent implements OnInit {
   }
 
   addTag(student: Student) {
-    student.tag.push(this.tag_name); 
+    student.tag.push(this.tag_name);
     this.tag_name = '';
   }
 }
